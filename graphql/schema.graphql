@@ -1,0 +1,24 @@
+type Note @aws_api_key @aws_cognito_user_pools {
+  id: ID!
+  name: String!
+  content: String!
+  author: String!
+}
+
+input NoteInput {
+  id: ID
+  name: String!
+  content: String!
+  author: String!
+}
+
+type Query {
+  listNotes: [Note] @aws_api_key @aws_cognito_user_pools
+  getNote(id: ID!): Note! @aws_api_key @aws_cognito_user_pools
+}
+
+type Mutation {
+  newNote(note: NoteInput!): Note!
+    @aws_cognito_user_pools(cognito_groups: ["Writer"])
+  deleteNote(id: ID!): ID @aws_cognito_user_pools(cognito_groups: ["Writer"])
+}
