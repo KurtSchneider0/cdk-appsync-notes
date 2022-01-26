@@ -7,8 +7,8 @@ async function getNote(id: string) {
     Key: { id: id }
   }
   try {
-    const { Note } = await docClient.get(paramaters).promise()
-    return Note
+    const { Item } = await docClient.get(paramaters).promise()
+    return Item
   } catch (error) {
     console.log('Error: ', error)
   }
